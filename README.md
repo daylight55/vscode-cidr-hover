@@ -10,11 +10,7 @@ A Visual Studio Code extension that provides detailed information about CIDR not
   - Network range (first to last address)
   - Usable range (excluding network and broadcast addresses)
 - Shows the number of available addresses inline after each CIDR notation
-- Supports multiple file types:
-  - Plaintext (.txt)
-  - Markdown (.md)
-  - YAML (.yaml, .yml)
-  - JSON (.json)
+- Supports all file types
 
 ![Feature Preview](images/preview.gif)
 
@@ -30,7 +26,7 @@ Or install it from the [Visual Studio Code Marketplace](https://marketplace.visu
 
 ## Usage
 
-1. Open any supported file type containing CIDR notation
+1. Open any file containing CIDR notation
 2. Hover over a CIDR notation (e.g., "192.168.0.0/24")
 3. View the detailed information in the hover tooltip
 4. See the number of available addresses displayed inline after the CIDR notation
