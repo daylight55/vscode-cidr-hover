@@ -1,5 +1,7 @@
 # CIDR Hover Info VSCode Extension
 
+![image](https://github.com/user-attachments/assets/55755fb1-837f-4377-b7b7-2635b6f40ef3)
+
 A Visual Studio Code extension that provides detailed information about CIDR notation when hovering over IP addresses with subnet masks. It also displays the number of available IP addresses inline.
 
 ## Features
@@ -11,8 +13,6 @@ A Visual Studio Code extension that provides detailed information about CIDR not
   - Usable range (excluding network and broadcast addresses)
 - Shows the number of available addresses inline after each CIDR notation
 - Supports all file types
-
-![Feature Preview](images/preview.gif)
 
 ## Installation
 
