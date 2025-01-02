@@ -10,18 +10,17 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
-    strategy:
-      matrix:
-        node-version: [16.x, 18.x]
-
     steps:
     - uses: actions/checkout@v3
     
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v3
-      with:
-        node-version: ${{ matrix.node-version }}
-        
+    - name: Install mise
+      run: curl https://mise.jdx.dev/install.sh | sh
+
+    - name: Setup Node.js using mise
+      run: |
+        mise install
+        mise use node
+      
     - name: Install dependencies
       run: npm ci
       
@@ -31,6 +30,16 @@ jobs:
     - name: Compile TypeScript
       run: npm run compile
       
-    # Add test step when tests are implemented
-    # - name: Run tests
-    #   run: npm test
+    - name: Run tests
+      run: npm run test:coverage
+
+    - name: Build VSIX
+      run: |
+        npm install -g @vscode/vsce
+        vsce package
+
+    - name: Upload VSIX as artifact
+      uses: actions/upload-artifact@v3
+      with:
+        name: extension
+        path: "*.vsix"
