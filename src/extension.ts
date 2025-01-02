@@ -3,7 +3,7 @@ import { calculateCIDRInfo } from './cidrUtils';
 
 export function activate(context: vscode.ExtensionContext) {
     // Hover Provider
-    const hoverProvider = vscode.languages.registerHoverProvider(['plaintext', 'markdown', 'yaml', 'json'], {
+    const hoverProvider = vscode.languages.registerHoverProvider('*', {
         provideHover(document: vscode.TextDocument, position: vscode.Position) {
             const wordRange = document.getWordRangeAtPosition(position, /\b\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}\/\d{1,2}\b/);
             
