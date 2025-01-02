@@ -1,0 +1,62 @@
+{
+  "name": "vscode-cidr-hover",
+  "displayName": "CIDR Hover Info",
+  "description": "Display IP range and number of IPs when hovering over CIDR notation",
+  "version": "0.0.1",
+  "publisher": "your-publisher-name",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/username/vscode-cidr-hover.git"
+  },
+  "bugs": {
+    "url": "https://github.com/username/vscode-cidr-hover/issues"
+  },
+  "homepage": "https://github.com/username/vscode-cidr-hover#readme",
+  "engines": {
+    "vscode": "^1.86.0"
+  },
+  "categories": [
+    "Other",
+    "Programming Languages",
+    "Formatters"
+  ],
+  "keywords": [
+    "cidr",
+    "ip",
+    "network",
+    "subnet",
+    "hover"
+  ],
+  "activationEvents": [
+    "onLanguage:plaintext",
+    "onLanguage:markdown",
+    "onLanguage:yaml",
+    "onLanguage:json"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "languages": [
+      {
+        "id": "plaintext",
+        "extensions": [".txt", ".md", ".json", ".yaml", ".yml"]
+      }
+    ]
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "pretest": "npm run compile && npm run lint",
+    "lint": "eslint src --ext ts",
+    "test": "node ./out/test/runTest.js"
+  },
+  "devDependencies": {
+    "@types/vscode": "^1.86.0",
+    "@types/node": "18.x",
+    "@typescript-eslint/eslint-plugin": "^6.9.0",
+    "@typescript-eslint/parser": "^6.9.0",
+    "eslint": "^8.52.0",
+    "typescript": "^5.2.2"
+  }
+}
