@@ -7,39 +7,79 @@ on:
     branches: [ main ]
 
 jobs:
-  build:
+  test:
     runs-on: ubuntu-latest
-
     steps:
-    - uses: actions/checkout@v3
-    
-    - name: Install mise
-      run: curl https://mise.jdx.dev/install.sh | sh
+      - uses: actions/checkout@v4
 
-    - name: Setup Node.js using mise
-      run: |
-        mise install
-        mise use node
-      
-    - name: Install dependencies
-      run: npm ci
-      
-    - name: Run ESLint
-      run: npm run lint
-      
-    - name: Compile TypeScript
-      run: npm run compile
-      
-    - name: Run tests
-      run: npm run test:coverage
+      - name: Install mise
+        run: curl https://mise.jdx.dev/install.sh | sh
 
-    - name: Build VSIX
-      run: |
-        npm install -g @vscode/vsce
-        vsce package
+      - name: Setup Node.js using mise
+        run: |
+          mise install
+          mise use node
 
-    - name: Upload VSIX as artifact
-      uses: actions/upload-artifact@v3
-      with:
-        name: extension
-        path: "*.vsix"
+      - name: Cache node modules
+        uses: actions/cache@v4
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run ESLint
+        run: npm run lint
+
+      - name: Compile TypeScript
+        run: npm run compile
+
+      - name: Run tests with coverage
+        run: npm run test:coverage
+
+      - name: Save coverage report
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage
+          path: coverage/lcov.info
+
+      - uses: k1LoW/octocov-action@v1
+
+  build:
+    needs: test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install mise
+        run: curl https://mise.jdx.dev/install.sh | sh
+
+      - name: Setup Node.js using mise
+        run: |
+          mise install
+          mise use node
+
+      - name: Cache node modules
+        uses: actions/cache@v4
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build VSIX
+        run: |
+          npm install -g @vscode/vsce
+          vsce package
+
+      - name: Upload VSIX
+        uses: actions/upload-artifact@v4
+        with:
+          name: extension
+          path: "*.vsix"
