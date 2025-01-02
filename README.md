@@ -1,6 +1,6 @@
 # CIDR Hover Info VSCode Extension
 
-![image](https://github.com/user-attachments/assets/55755fb1-837f-4377-b7b7-2635b6f40ef3)
+![image](https://github.com/user-attachments/assets/803b60f4-f8e1-404d-a2a4-10b47d608917)
 
 A Visual Studio Code extension that provides detailed information about CIDR notation when hovering over IP addresses with subnet masks. It also displays the number of available IP addresses inline.
 
@@ -22,7 +22,7 @@ You can install this extension through the Visual Studio Code Marketplace:
 2. Press `Ctrl+P` / `Cmd+P`
 3. Type `ext install your-publisher-name.vscode-cidr-hover`
 
-Or install it from the [Visual Studio Code Marketplace](https://marketplace.visualstudio.com/items?itemName=your-publisher-name.vscode-cidr-hover) website.
+Or install it from the [Visual Studio Code Marketplace](https://marketplace.visualstudio.com/items?itemName=daylight55.vscode-cidr-hover) website.
 
 ## Usage
 
@@ -51,7 +51,7 @@ This extension does not add any VS Code settings.
 
 ## Known Issues
 
-See the [GitHub issues](https://github.com/username/vscode-cidr-hover/issues) page.
+See the [GitHub issues](https://github.com/daylight55/vscode-cidr-hover/issues) page.
 
 ## Contributing
 
