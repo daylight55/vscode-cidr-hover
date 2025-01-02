@@ -3,20 +3,21 @@ name: CI
 on:
   push:
     branches: [main]
+    tags-ignore:
+      - 'v*'
   pull_request:
     branches: [main]
 
 permissions:
   contents: write
   pull-requests: write
-  checks: write
-  statuses: write
 
 jobs:
-  test:
+  build:
     runs-on: ubuntu-latest
+
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v3
 
       - name: Install mise
         run: curl https://mise.jdx.dev/install.sh | sh
@@ -25,14 +26,6 @@ jobs:
         run: |
           mise install
           mise use node
-
-      - name: Cache node modules
-        uses: actions/cache@v4
-        with:
-          path: ~/.npm
-          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
-          restore-keys: |
-            ${{ runner.os }}-node-
 
       - name: Install dependencies
         run: npm ci
@@ -43,49 +36,19 @@ jobs:
       - name: Compile TypeScript
         run: npm run compile
 
-      - name: Run tests with coverage
+      - name: Run tests
         run: npm run test:coverage
 
-      - name: Save coverage report
-        uses: actions/upload-artifact@v4
-        with:
-          name: coverage
-          path: coverage/lcov.info
-
-      - uses: k1LoW/octocov-action@v1
-
-  build:
-    needs: test
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-
-      - name: Install mise
-        run: curl https://mise.jdx.dev/install.sh | sh
-
-      - name: Setup Node.js using mise
-        run: |
-          mise install
-          mise use node
-
-      - name: Cache node modules
-        uses: actions/cache@v4
-        with:
-          path: ~/.npm
-          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
-          restore-keys: |
-            ${{ runner.os }}-node-
-
-      - name: Install dependencies
-        run: npm ci
+      - name: Run octocov
+        uses: k1LoW/octocov-action@v0
 
       - name: Build VSIX
         run: |
           npm install -g @vscode/vsce
           vsce package
 
-      - name: Upload VSIX
-        uses: actions/upload-artifact@v4
+      - name: Upload VSIX as artifact
+        uses: actions/upload-artifact@v3
         with:
           name: extension
           path: '*.vsix'
