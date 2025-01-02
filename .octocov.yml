@@ -27,3 +27,6 @@ coverage-threshold:
     lines: 80
   diff:
     lines: 80
+
+badge:
+  path: docs/badges/coverage.svg
