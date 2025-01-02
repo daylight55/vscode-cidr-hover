@@ -3,16 +3,16 @@
   "displayName": "CIDR Hover Info",
   "description": "Display IP range and number of IPs when hovering over CIDR notation",
   "version": "0.0.1",
-  "publisher": "your-publisher-name",
+  "publisher": "daylight55",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/username/vscode-cidr-hover.git"
+    "url": "https://github.com/daylight55/vscode-cidr-hover.git"
   },
   "bugs": {
-    "url": "https://github.com/username/vscode-cidr-hover/issues"
+    "url": "https://github.com/daylight55/vscode-cidr-hover/issues"
   },
-  "homepage": "https://github.com/username/vscode-cidr-hover#readme",
+  "homepage": "https://github.com/daylight55/vscode-cidr-hover#readme",
   "engines": {
     "vscode": "^1.86.0"
   },
